@@ -1,0 +1,10 @@
+<div class="products-header">
+  <h1>Products <%= Time.now %></h1>
+  <div><%= link_to "New product", new_product_path, data: { turbo_frame: "product_form" } %></div>
+</div>
+
+<%= turbo_frame_tag "product_form", target: "_top" %>
+
+<%= turbo_frame_tag :all_products, src: product_list_products_path(format: turbo_stream, page: params[:page]), loading: :lazy do %>
+  <span class='loading'>Loading...</span>
+<% end %>

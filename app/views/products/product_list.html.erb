@@ -1,0 +1,23 @@
+<%= turbo_frame_tag :all_products do %>
+  <%= link_to 'Ascending Sort', product_list_products_path(order: 'asc'), data: { turbo_stream: true } %>
+  <%= link_to 'Descending Sort', product_list_products_path(order: 'desc'), data: { turbo_stream: true } %>
+  <hr>
+  <%= link_to 'First', product_list_products_path(page: @first_page), data: { turbo_stream: true } %>
+  <%= form_tag('/products/product_list', method: :get) do %>
+    <%= text_field_tag(:page, params[:page].to_i) %>
+  <% end %>
+  <%= link_to 'Last', product_list_products_path(page: @last_page), data: { turbo_stream: true } %>
+
+  <div id="products">
+      <table>
+        <thead>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Action</th>
+        </thead>
+        <tbody id='product_body'>
+          <%= render @products %>
+        </tbody>
+      </table>
+  </div>
+<% end %>
